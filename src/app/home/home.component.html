@@ -1,0 +1,123 @@
+
+<!-- Add Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+<!-- Add Bootstrap JavaScript (jQuery is required) -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<div>
+<app-sidebar></app-sidebar>
+</div>
+
+<div>
+
+  <div class="container">
+    <div class="content">
+      <div class="dropdowns">
+      <div class="dropdown">
+        <label for="dropdown1">Leads : </label>
+        <select id="dropdown1">
+          <option value="">Select</option>
+          <option value="option1">Manohar</option>
+          <option value="option2">Tejan</option>
+          <option value="option3">Kranthi</option>
+        </select>
+      </div>
+  
+      <div class="dropdown">
+        <label for="dropdown2">Technology : </label>
+        <select id="dropdown2">
+          <option value="">Select</option>
+          <option value="option1">JAVA</option>
+          <option value="option2">.NET</option>
+          <option value="option3">SalesForce</option>
+        </select>
+      </div>
+
+      <button (click)="openPopup()">Add record</button>
+
+    </div>
+  
+      <div>
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Header 1</th>
+              <th>Header 2</th>
+              <th>Header 3</th>
+              <th>Actions</th>
+
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of sampleArray">
+              <td>{{item.header1}}</td>
+              <td>{{item.header2}}</td>
+              <td>{{item.header3}}</td>
+              <div class="action-icons">
+                <i (click)="openEditPopup(item)"class="fas fa-edit"></i>
+                <i (click)="openDeletePopup(item)"class="fas fa-trash"></i>
+              </div>
+            </tr>
+            <!-- Add more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  </div>
+
+  <div *ngIf="isPopupOpen" class="popup-container">
+    <div class="popup-content">
+      <h2>Popup Title</h2>
+      <div class="form-group">
+        <label for="field1">Field 1</label>
+        <input type="text" id="field1" class="form-control" placeholder="Enter Field 1" [(ngModel)]="field1Value">
+      </div>
+      <div class="form-group">
+        <label for="field2">Field 2</label>
+        <input type="text" id="field2" class="form-control" placeholder="Enter Field 2" [(ngModel)]="field2Value">
+      </div>
+      <div class="form-group">
+        <label for="field3">Field 3</label>
+        <input type="text" id="field3" class="form-control" placeholder="Enter Field 3" [(ngModel)]="field3Value">
+      </div> 
+      <button (click)="submit()">Submit</button>
+       <button (click)="closePopup()">Close</button>
+    </div>
+  </div>
+
+  <div *ngIf="iseditPopupOpen" class="popup-container">
+    <div class="popup-content">
+      <h2>Edit Record</h2>
+      <div class="form-group">
+        <label for="field1">Field 1</label>
+        <input type="text" id="field1"class="form-control" [(ngModel)]="edit1">
+      </div>
+      <div class="form-group">
+        <label for="field2">Field 2</label>
+        <input type="text" id="field2" class="form-control" [(ngModel)]="edit2" >
+      </div>
+      <div class="form-group">
+        <label for="field3">Field 3</label>
+        <input type="text" id="field3" class="form-control" [(ngModel)]="edit3" >
+      </div> 
+      <button (click)="editSubmit()">Submit</button>
+       <button (click)="closeEditPopup()">Close</button>
+    </div>
+  </div>
+
+  <div *ngIf="isDeletePopupOpen" class="popup-container">
+    <div class="popup-content delete-popup">
+      <h2>Delete Confirmation</h2>
+      <p>Are you sure you want to delete this item?</p>
+      <div class="button-container">
+        <button class="btn-delete" (click)="Delete()">Delete</button>
+        <button class="btn-cancel"(click)="closeDeletePopup()">Cancel</button>
+      </div>
+    </div>
+  </div>
+  
